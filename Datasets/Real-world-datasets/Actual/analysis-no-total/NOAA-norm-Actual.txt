@@ -1,0 +1,42 @@
+File Name: ./NOAA-norm-Actual.arff
+BLOCK_SIZE: 2000
+min_index: 1
+Total number of examples: 16344
+
+Class 0 ratio:
+0.634 - 0.748
+Mean: 0.683 | Std. Dev.: 0.036
+q1, q2, q3: 0.652, 0.688, 0.71 | iqr: 0.058
+
+Class 1 ratio:
+0.252 - 0.366
+Mean: 0.317 | Std. Dev.: 0.036
+q1, q2, q3: 0.29, 0.312, 0.348 | iqr: 0.058
+
+Estimated minority clusters:
+9 - 33
+Mean: 26.444 | Std. Dev.: 6.894
+q1, q2, q3: 26.5, 28, 30.0 | iqr: 3.5
+
+Safe ratio:
+0.286 - 0.452
+Mean: 0.341 | Std. Dev.: 0.052
+q1, q2, q3: 0.304, 0.327, 0.367 | iqr: 0.063
+
+Borderline ratio:
+0.328 - 0.496
+Mean: 0.426 | Std. Dev.: 0.049
+q1, q2, q3: 0.398, 0.431, 0.459 | iqr: 0.061
+
+Rare ratio:
+0.105 - 0.176
+Mean: 0.146 | Std. Dev.: 0.022
+q1, q2, q3: 0.13, 0.147, 0.165 | iqr: 0.035
+
+Outlier ratio:
+0.061 - 0.125
+Mean: 0.087 | Std. Dev.: 0.018
+q1, q2, q3: 0.075, 0.085, 0.095 | iqr: 0.02
+
+Latex table row:
+16344 & 0 & 9-33 (28) & 25\%-37\% (31\%) & 29\%-45\% (33\%) & 33\%-50\% (43\%) & 11\%-18\% (15\%) & 6\%-13\% (9\%)

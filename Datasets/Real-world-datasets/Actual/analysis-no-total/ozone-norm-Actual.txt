@@ -1,0 +1,42 @@
+File Name: ./ozone-norm-Actual.arff
+BLOCK_SIZE: 200
+min_index: 1
+Total number of examples: 2281
+
+Class 0 ratio:
+0.815 - 1.0
+Mean: 0.945 | Std. Dev.: 0.054
+q1, q2, q3: 0.942, 0.96, 0.975 | iqr: 0.033
+
+Class 1 ratio:
+0.0 - 0.185
+Mean: 0.055 | Std. Dev.: 0.054
+q1, q2, q3: 0.025, 0.04, 0.057 | iqr: 0.032
+
+Estimated minority clusters:
+0 - 2
+Mean: 0.714 | Std. Dev.: 0.951
+q1, q2, q3: 0, 0, 2 | iqr: 2
+
+Safe ratio:
+0.0 - 0.216
+Mean: 0.05 | Std. Dev.: 0.082
+q1, q2, q3: 0.0, 0.0, 0.1 | iqr: 0.1
+
+Borderline ratio:
+0.0 - 0.607
+Mean: 0.253 | Std. Dev.: 0.278
+q1, q2, q3: 0.0, 0.167, 0.595 | iqr: 0.595
+
+Rare ratio:
+0.135 - 0.583
+Mean: 0.354 | Std. Dev.: 0.185
+q1, q2, q3: 0.2, 0.3, 0.545 | iqr: 0.345
+
+Outlier ratio:
+0.054 - 0.7
+Mean: 0.343 | Std. Dev.: 0.212
+q1, q2, q3: 0.143, 0.333, 0.455 | iqr: 0.312
+
+Latex table row:
+2281 & 5 & 0-2 (0) & 0\%-18\% (4\%) & 0\%-22\% (0\%) & 0\%-61\% (17\%) & 14\%-58\% (30\%) & 5\%-70\% (33\%)

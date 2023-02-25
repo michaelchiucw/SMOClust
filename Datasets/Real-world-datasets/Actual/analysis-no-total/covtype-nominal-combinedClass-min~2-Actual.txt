@@ -1,0 +1,42 @@
+File Name: ./covtype-nominal-combinedClass-min~2-Actual.arff
+BLOCK_SIZE: 2000
+min_index: 1
+Total number of examples: 522911
+
+Class 0 ratio:
+0.111 - 1.0
+Mean: 0.934 | Std. Dev.: 0.133
+q1, q2, q3: 0.928, 1.0, 1.0 | iqr: 0.072
+
+Class 1 ratio:
+0.0 - 0.889
+Mean: 0.066 | Std. Dev.: 0.133
+q1, q2, q3: 0.0, 0.0, 0.072 | iqr: 0.072
+
+Estimated minority clusters:
+0 - 33
+Mean: 6.938 | Std. Dev.: 5.635
+q1, q2, q3: 2.0, 5, 11.0 | iqr: 9.0
+
+Safe ratio:
+0.0 - 1.0
+Mean: 0.87 | Std. Dev.: 0.137
+q1, q2, q3: 0.855, 0.9, 0.937 | iqr: 0.083
+
+Borderline ratio:
+0.0 - 0.778
+Mean: 0.094 | Std. Dev.: 0.109
+q1, q2, q3: 0.046, 0.069, 0.107 | iqr: 0.061
+
+Rare ratio:
+0.0 - 0.136
+Mean: 0.023 | Std. Dev.: 0.026
+q1, q2, q3: 0.006, 0.016, 0.032 | iqr: 0.026
+
+Outlier ratio:
+0.0 - 0.111
+Mean: 0.013 | Std. Dev.: 0.019
+q1, q2, q3: 0.001, 0.006, 0.015 | iqr: 0.014
+
+Latex table row:
+522911 & 149 & 0-33 (5) & 0\%-89\% (0\%) & 0\%-100\% (90\%) & 0\%-78\% (7\%) & 0\%-14\% (2\%) & 0\%-11\% (1\%)

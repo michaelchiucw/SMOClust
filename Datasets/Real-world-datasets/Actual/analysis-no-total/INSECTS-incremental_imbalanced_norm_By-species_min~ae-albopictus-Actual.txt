@@ -1,0 +1,42 @@
+File Name: ./INSECTS-incremental_imbalanced_norm_By-species_min~ae-albopictus-Actual.arff
+BLOCK_SIZE: 2000
+min_index: 1
+Total number of examples: 406840
+
+Class 0 ratio:
+0.813 - 1.0
+Mean: 0.905 | Std. Dev.: 0.034
+q1, q2, q3: 0.89, 0.906, 0.929 | iqr: 0.039
+
+Class 1 ratio:
+0.0 - 0.187
+Mean: 0.095 | Std. Dev.: 0.034
+q1, q2, q3: 0.071, 0.094, 0.11 | iqr: 0.039
+
+Estimated minority clusters:
+0 - 27
+Mean: 14.517 | Std. Dev.: 5.032
+q1, q2, q3: 11, 15, 17 | iqr: 6
+
+Safe ratio:
+0.0 - 0.245
+Mean: 0.069 | Std. Dev.: 0.061
+q1, q2, q3: 0.024, 0.05, 0.101 | iqr: 0.076
+
+Borderline ratio:
+0.0 - 0.464
+Mean: 0.317 | Std. Dev.: 0.074
+q1, q2, q3: 0.275, 0.322, 0.362 | iqr: 0.087
+
+Rare ratio:
+0.0 - 0.425
+Mean: 0.286 | Std. Dev.: 0.062
+q1, q2, q3: 0.243, 0.288, 0.328 | iqr: 0.085
+
+Outlier ratio:
+0.143 - 1.0
+Mean: 0.328 | Std. Dev.: 0.101
+q1, q2, q3: 0.27, 0.332, 0.37 | iqr: 0.1
+
+Latex table row:
+406840 & 1 & 0-27 (15) & 0\%-19\% (9\%) & 0\%-24\% (5\%) & 0\%-46\% (32\%) & 0\%-42\% (29\%) & 14\%-100\% (33\%)

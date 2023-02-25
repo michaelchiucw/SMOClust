@@ -1,0 +1,42 @@
+File Name: ./PAKDD2009-norm-Actual.arff
+BLOCK_SIZE: 2000
+min_index: 1
+Total number of examples: 44998
+
+Class 0 ratio:
+0.785 - 0.828
+Mean: 0.803 | Std. Dev.: 0.011
+q1, q2, q3: 0.794, 0.802, 0.812 | iqr: 0.018
+
+Class 1 ratio:
+0.172 - 0.215
+Mean: 0.197 | Std. Dev.: 0.011
+q1, q2, q3: 0.188, 0.198, 0.206 | iqr: 0.018
+
+Estimated minority clusters:
+19 - 32
+Mean: 27.13 | Std. Dev.: 3.02
+q1, q2, q3: 25, 28, 29 | iqr: 4
+
+Safe ratio:
+0.0 - 0.042
+Mean: 0.022 | Std. Dev.: 0.013
+q1, q2, q3: 0.01, 0.023, 0.033 | iqr: 0.023
+
+Borderline ratio:
+0.27 - 0.382
+Mean: 0.319 | Std. Dev.: 0.028
+q1, q2, q3: 0.302, 0.318, 0.332 | iqr: 0.03
+
+Rare ratio:
+0.33 - 0.406
+Mean: 0.364 | Std. Dev.: 0.02
+q1, q2, q3: 0.349, 0.363, 0.374 | iqr: 0.025
+
+Outlier ratio:
+0.223 - 0.338
+Mean: 0.295 | Std. Dev.: 0.028
+q1, q2, q3: 0.282, 0.298, 0.314 | iqr: 0.033
+
+Latex table row:
+44998 & 0 & 19-32 (28) & 17\%-22\% (20\%) & 0\%-4\% (2\%) & 27\%-38\% (32\%) & 33\%-41\% (36\%) & 22\%-34\% (30\%)
