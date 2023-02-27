@@ -1,8 +1,9 @@
 # Synthetic Minority Oversampling based on stream Clustering (SMOClust)
 
 This repository contains the followings:
- - The MOA implementation of SMOClust
- - Supplementary document
+ - The MOA implementation of SMOClust (At Implementation/moa/src/main/java/moa/classifiers/meta/SMOClust.java)
+ - The MOA implementation of the modified heldout test for artificial class imbalanced data stream. (At Implementation/moa/src/main/java/moa/tasks/EvaluatePeriodicHeldOutTestARFF.java)
+   - The one in `project-decision-boundary` branch will project the decision boundary of the evaluated apprach upon evaluation time steps.
  - Bash script to generate artifical data streams (in Datasets folder)
  
 
