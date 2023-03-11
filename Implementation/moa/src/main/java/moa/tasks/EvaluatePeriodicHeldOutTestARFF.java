@@ -4,19 +4,22 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 import com.github.javacliparser.FileOption;
 import com.github.javacliparser.FlagOption;
 import com.github.javacliparser.IntOption;
 import com.github.javacliparser.Option;
+import com.github.javacliparser.StringOption;
 import com.yahoo.labs.samoa.instances.Instance;
 import com.yahoo.labs.samoa.instances.Instances;
 
 import moa.classifiers.MultiClassClassifier;
 import moa.core.Example;
+import moa.core.InstanceExample;
 import moa.core.Measurement;
+import moa.core.MiscUtils;
 import moa.core.ObjectRepository;
 import moa.core.StringUtils;
 import moa.core.TimingUtils;
@@ -73,12 +76,36 @@ public class EvaluatePeriodicHeldOutTestARFF extends ClassificationMainTask {
 
     public FlagOption cacheTestOption = new FlagOption("cacheTest", 'c',
             "Cache test instances in memory.");
+    
+    public ClassOption uniformDistributionSetOption = new ClassOption("uniformDistributionSet", 'u',
+            "A uniform distribution data set for plotting decision boundary", ExampleStream.class,
+            "ArffFileStream");
+    
+    public StringOption projetDecisionAreasStepsOption = new StringOption("projectionSteps", 'p',
+    		"Time steps to project the decision areas \n" + 
+    		"The values should be integers and are seperated by semi-colons (;). e.g. \"50;100;150\"\n" +
+			"Also, it has to be a multiple of sample Frequency.",
+    		"70000;100000");
+    
+    public FileOption outputPredictionFileOption = new FileOption("outputPredictionFile", 'o',
+            "File to append output predictions to.", null, "csv", true);
 
 	@Override
 	protected Object doMainTask(TaskMonitor monitor, ObjectRepository repository) {
 		ExampleStream trainingStream = (ExampleStream) getPreparedClassOption(this.trainingStreamOption);
 		LearningPerformanceEvaluator evaluator = (LearningPerformanceEvaluator) getPreparedClassOption(this.evaluatorOption);
 		LearningCurve learningCurve = new LearningCurve("evaluation instances");
+		
+		ExampleStream uniformDist_set = (ExampleStream) getPreparedClassOption(this.uniformDistributionSetOption);
+		
+		int[] projectionSteps = Arrays.stream(this.projetDecisionAreasStepsOption.getValue().split(";")).mapToInt(Integer::parseInt).toArray();
+		
+		for (int step : projectionSteps) {
+			if (step % this.sampleFrequencyOption.getValue() != 0) {
+				throw new RuntimeException(
+                        "One of the projection steps is not a multiple of sampling frequency.");
+			}
+		}
 		
 		// File for dumpping results.
 		File dumpFile = this.dumpFileOption.getFile();
@@ -160,6 +187,8 @@ public class EvaluatePeriodicHeldOutTestARFF extends ClassificationMainTask {
         double totalTrainTime = 0.0;
         int testSetIndex = 0;
         
+        int projectionStep_index = 0;
+        
         while ((this.trainingStreamSizeOption.getValue() < 1
                 || instancesProcessed < this.trainingStreamSizeOption.getValue())
                 && trainingStream.hasMoreInstances()) {
@@ -184,6 +213,74 @@ public class EvaluatePeriodicHeldOutTestARFF extends ClassificationMainTask {
         	if (this.timeLimitOption.getValue() > 0 && totalTrainTime > this.timeLimitOption.getValue()) {
                 break;
             }
+        	
+        	int projectionStep = projectionSteps[projectionStep_index];
+        	
+        	if (this.outputPredictionFileOption.getValue() != null && 
+    				(instancesProcessed == projectionStep || 
+    				instancesProcessed == this.trainingStreamSizeOption.getValue())) {
+
+    			// Set up the corresponding output prediction file.
+    			String original_s = this.outputPredictionFileOption.getValueAsCLIString();
+    			String s = original_s;
+    			
+    			if (s.substring(s.length()-4, s.length()).equals(".csv")) {
+    				s = s.substring(0, s.length()-4); // remove ".csv"
+    			}
+            	s = s.concat("_" + (instancesProcessed / 1000) + "k.csv");
+    			
+            	this.outputPredictionFileOption.setValueViaCLIString(s);
+            	
+            	File outputPredictionFile = this.outputPredictionFileOption.getFile();
+                PrintStream outputPredictionResultStream = null;
+                if (outputPredictionFile != null) {
+                    try {
+                    	if (outputPredictionFile.exists()) {
+//                    		outputPredictionResultStream = new PrintStream(new FileOutputStream(outputPredictionFile, true), true);
+                            outputPredictionResultStream = new PrintStream(new BufferedOutputStream(
+                                    new FileOutputStream(outputPredictionFile, false), 1024*1024), true);
+                        } else {
+//                        	outputPredictionResultStream = new PrintStream(new FileOutputStream(outputPredictionFile), true);
+                            outputPredictionResultStream = new PrintStream(new BufferedOutputStream(
+                                    new FileOutputStream(outputPredictionFile), 1024*1024), true);
+                        }
+                    } catch (Exception ex) {
+                        throw new RuntimeException(
+                                "Unable to open prediction result file: " + outputPredictionFile, ex);
+                    }
+                }
+                
+                uniformDist_set.restart();
+                while(uniformDist_set.hasMoreInstances()) {
+                	InstanceExample example = (InstanceExample) uniformDist_set.nextInstance();
+        			double[] prediction = learner.getVotesForInstance(example);
+        			double predicted_class = MiscUtils.maxIndex(prediction);
+        			
+        			Instance inst = example.getData();
+        			
+        			StringBuilder to_print_builder = new StringBuilder();
+        			for (int i = 0; i < inst.numAttributes(); ++i) {
+        				if (inst.attribute(i) != inst.classAttribute()) {
+        					to_print_builder.append(inst.value(i));
+        				} else {
+        					to_print_builder.append(predicted_class);
+        				}
+        				if (i < inst.numAttributes() - 1) {
+        					to_print_builder.append(",");
+        				}
+        			}
+        			outputPredictionResultStream.println(to_print_builder.toString());
+        			outputPredictionResultStream.flush();
+                }
+                if (outputPredictionResultStream != null) {
+        			outputPredictionResultStream.close();
+                }
+            	
+            	// Reset the output prediction file name.
+                this.outputPredictionFileOption.setValueViaCLIString(original_s);
+                projectionStep_index = projectionStep_index + 1 >= projectionSteps.length ? projectionStep_index : projectionStep_index + 1;
+    		}
+        	
         	// Restart the test set and the evaluator.
 //        	System.out.println("Test Set now: " + testSetIndex);
         	testSets[testSetIndex].restart();
