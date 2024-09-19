@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/499899445.svg)](https://zenodo.org/doi/10.5281/zenodo.13797882)
 # Synthetic Minority Oversampling based on stream Clustering (SMOClust)
 
 This repository contains the followings:
